@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Ben Arnold</Authors>
+    <Company />
+    <Product />
+    <Description>Glue to allow NSubstitute to use Fluent Assertions when verifying received calls.</Description>
+    <PackageProjectUrl>https://github.com/benagain/nsubstitute.verify.that</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/benagain/nsubstitute.verify.that</RepositoryUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageTags>nsubstitute fluentassertions</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="4.19.4" />
+    <PackageReference Include="NSubstitute" Version="3.1.0" />
+  </ItemGroup>
+
+</Project>
