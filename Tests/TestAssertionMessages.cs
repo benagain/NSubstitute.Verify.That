@@ -36,7 +36,7 @@
 
             var actual = MessageFor(() => sub.Received().SingleParam(Verify.That<int>(i => i.Should().Be(1))));
 
-            actual.Should().StartWith("Expected to receive a call matching:\n	SingleParam(\"\nExpected value to be 1, but found 2.\")\r\nActually received no matching calls.\r\n");
+            actual.Should().StartWith("Expected to receive a call matching:\n	SingleParam(\"\nExpected i to be 1, but found 2.\")\r\nActually received no matching calls.\r\n");
         }
 
         [Fact]

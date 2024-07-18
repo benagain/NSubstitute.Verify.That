@@ -1,17 +1,31 @@
-﻿namespace NSubstitute
-{
-    using FluentAssertions.Execution;
-    using NSubstitute.Core;
-    using NSubstitute.Core.Arguments;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions.Execution;
+using NSubstitute.Core;
+using NSubstitute.Core.Arguments;
 
+namespace NSubstitute
+{
     public static class Verify
     {
-        private static readonly ArgumentSpecificationQueue Queue = new ArgumentSpecificationQueue(SubstitutionContext.Current);
-        private readonly static ArgumentFormatter DefaultArgumentFormatter = new ArgumentFormatter();
+        private static readonly ArgumentFormatter DefaultArgumentFormatter = new ArgumentFormatter();
+        /// <summary>
+        /// Enqueues a matcher for the method argument in current position and returns the value which should be
+        /// passed back to the method you invoke.
+        /// </summary>
+        /// <remarks>Temporary replacement for <see cref="ArgumentMatcher.Enqueue{T}"/> because of issue in NSubstitute output for expected parameter description for custom <see cref="IArgumentMatcher{T}"/> implementations. (https://github.com/nsubstitute/NSubstitute/issues/796) </remarks>
+        internal static ref T? Enqueue<T>(IArgumentMatcher argumentMatcher)
+        {
+            SubstitutionContext.Current.ThreadContext.EnqueueArgumentSpecification(new ArgumentSpecification(typeof(T), argumentMatcher));
+            return ref new DefaultValueContainer<T>().Value;
+        }
 
+        private class DefaultValueContainer<T>
+        {
+            public T? Value;
+        }
+        
         /// <summary>
         /// Verify the NSubstitute call using FluentAssertions.
         /// </summary>
@@ -40,24 +54,26 @@
         /// <typeparam name="T">Type of argument to verify.</typeparam>
         /// <param name="action">Action in which to perform FluentAssertions verifications.</param>
         /// <returns></returns>
-        public static T That<T>(Action<T> action)
-            => Queue.EnqueueSpecFor<T>(new AssertionMatcher<T>(action));
+        public static ref T? That<T>(Action<T?> action)
+            => ref Enqueue<T>(new AssertionMatcher<T>(action));
 
-        private class AssertionMatcher<T> : IArgumentMatcher
+        private class AssertionMatcher<T> : IArgumentMatcher, IArgumentMatcher<T>
         {
-            private readonly Action<T> assertion;
+            private readonly Action<T?> assertion;
             private string allFailures = "";
 
-            public AssertionMatcher(Action<T> assertion)
+            public AssertionMatcher(Action<T?> assertion)
                 => this.assertion = assertion;
+            
+            bool IArgumentMatcher.IsSatisfiedBy(object? argument) => IsSatisfiedBy((T?)argument);
 
-            public bool IsSatisfiedBy(object argument)
+            public bool IsSatisfiedBy(T? argument)
             {
                 using (var scope = new AssertionScope())
                 {
                     try
                     {
-                        assertion((T)argument);
+                        assertion(argument);
                     }
                     catch (Exception exception)
                     {

@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Always use the latest C# language version -->
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+</Project>

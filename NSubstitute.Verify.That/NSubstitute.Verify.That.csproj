@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Ben Arnold</Authors>
     <Company />
@@ -11,11 +10,10 @@
     <RepositoryUrl>https://github.com/benagain/nsubstitute.verify.that</RepositoryUrl>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageTags>nsubstitute fluentassertions</PackageTags>
+    <nullable>enable</nullable>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="4.19.4" />
-    <PackageReference Include="NSubstitute" Version="3.1.0" />
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="NSubstitute" />
   </ItemGroup>
-
 </Project>

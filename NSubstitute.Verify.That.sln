@@ -1,11 +1,16 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSubstitute.Verify.That", "NSubstitute.Verify.That\NSubstitute.Verify.That.csproj", "{782ECB65-9E4F-4150-AC37-A6FC308ABB13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSubstitute.Verify.That", "NSubstitute.Verify.That\NSubstitute.Verify.That.csproj", "{782ECB65-9E4F-4150-AC37-A6FC308ABB13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{7076A58C-368A-4568-9714-E34F953E819E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{7076A58C-368A-4568-9714-E34F953E819E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3BBE8BD6-2901-4A53-A002-FA6FA1BD5016}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
