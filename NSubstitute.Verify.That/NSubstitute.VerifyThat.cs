@@ -73,7 +73,7 @@ namespace NSubstitute
                 {
                     try
                     {
-                        assertion((T?)argument);
+                        assertion(argument);
                     }
                     catch (Exception exception)
                     {
